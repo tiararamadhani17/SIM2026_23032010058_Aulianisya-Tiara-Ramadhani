@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects - Admin Panel</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body{
+      background: linear-gradient(90deg, #F9DDFF 40%, #FFF8DA 100%);
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    /* panel kiri */
+    .panel-kiri{
+      background: linear-gradient(180deg, #FFF8DA 0%, #F9DDFF 100%);
+    }
+
+    .btn-menu{
+      background: linear-gradient(90deg, #FFC2A6 0%, #F8AFAF 100%);
+      color:#FFFFFF;
+      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+    }
+    .btn-menu:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 6px 12px rgba(0,0,0,.12);
+      opacity: 0.95;
+    }
+
+    .btn-menu-active{
+      background: #FF8C8C;
+      color:#FFF;
+      box-shadow: 0 7px 16px rgba(0,0,0,.18);
+    }
+
+    .logout-link,
+    .back-link{
+      color:#FF6C6C;
+      font-weight:700;
+      transition: transform .15s ease, color .15s ease;
+    }
+    .logout-link:hover,
+    .back-link:hover{
+      transform: translateY(-1px);
+      color:#FF3535;
+    }
+
+    .title-cooper{
+      font-family: "Cooper Black", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    /* card projects */
+    .project-card{
+      background:#FF9C9C;
+      border:2px solid #FF6C6C;
+      border-radius:22px;
+      box-shadow:0 12px 26px rgba(0,0,0,.14);
+    }
+
+    .field-wrapper{
+      background:#FFF8DA;
+      border:2px solid #FF8C8C;
+      border-radius:4px;
+      padding:0.4rem 0.8rem;
+      display:flex;
+      align-items:center;
+    }
+
+    .input-base{
+      background:transparent;
+      border:none;
+      outline:none;
+      width:100%;
+      font-size:14px;
+      color:#1E1E1E;
+    }
+    .input-base::placeholder{
+      color:#767676;
+    }
+
+    /* biar input date bentuknya rata */
+    input[type="date"].input-base {
+      color:#1E1E1E;
+    }
+
+    .file-label{
+      background:#D9D9D9;
+      border:2px solid #000000;
+      border-radius:2px;
+      padding:0.15rem 0.9rem;
+      font-size:14px;
+      font-weight:600;
+      cursor:pointer;
+    }
+
+    /* TOMBOL ADD PROJECT – lebih kontras dari card */
+    .add-btn{
+      background: linear-gradient(90deg, #FFAE88 100%);
+      border:2px solid #FF6C6C;
+      border-radius:999px;
+      color:#FFFFFF;
+      box-shadow:0 8px 18px rgba(0,0,0,.18);
+      transition:transform .15s ease, filter .15s ease;
+    }
+    .add-btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.05);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex">
+
+  <!-- ============== PANEL KIRI ============== -->
+  <aside class="panel-kiri w-[280px] min-h-screen p-6 flex flex-col justify-between shadow-xl">
+
+    <!-- Logo + judul -->
+    <div>
+      <div class="text-center mb-4">
+        <img src="Assets/logo.png" class="w-40 mx-auto mb-4" alt="Logo Tiara" />
+        <p class="text-[22px] font-extrabold text-[#FF8C8C]">Tiara’s Panel</p>
+      </div>
+
+      <!-- MENU -->
+      <nav class="space-y-4 mt-8">
+
+        <!-- Personal Data -->
+        <a href="dashboarddata.html"
+           class="btn-menu flex items-center gap-3 px-5 py-3 rounded-full text-[15px] font-bold opacity-90">
+          <!-- User Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               class="w-5 h-5">
+            <path fill="currentColor"
+                  d="M12 12a4 4 0 1 0-4-4a4 4 0 0 0 4 4Zm0 2c-4 0-7 1.79-7 4v1h14v-1c0-2.21-3-4-7-4Z"/>
+          </svg>
+          <span>Personal Data</span>
+        </a>
+
+        <!-- Projects (ACTIVE) -->
+        <a href="dashboardproject.html"
+           class="btn-menu btn-menu-active flex items-center gap-3 px-5 py-3 rounded-full text-[15px] font-bold">
+          <!-- Folder Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               class="w-5 h-5">
+            <path fill="currentColor"
+                  d="M10 4H4a2 2 0 0 0-2 2v2h20V8a2 2 0 0 0-2-2h-8l-2-2Zm12 6H2v8a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2Z"/>
+          </svg>
+          <span>Projects</span>
+        </a>
+
+        <!-- Certificates -->
+        <a href="dashboardcertif.html"
+           class="btn-menu flex items-center gap-3 px-5 py-3 rounded-full text-[15px] font-bold opacity-90">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               class="w-5 h-5">
+            <circle cx="12" cy="8" r="3.5" fill="currentColor"/>
+            <path fill="currentColor"
+                  d="M9.5 11.5L7 21l3.2-1.3L12 21l1.8-1.3L17 21l-2.5-9.5A5.8 5.8 0 0 1 12 12a5.8 5.8 0 0 1-2.5-.5Z"/>
+          </svg>
+          <span>Certificates</span>
+        </a>
+
+        <!-- Sharing -->
+        <a href="dashboardsharing.html"
+           class="btn-menu flex items-center gap-3 px-5 py-3 rounded-full text-[15px] font-bold opacity-90">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               class="w-5 h-5">
+            <path fill="currentColor"
+                  d="M4 4.75A2.75 2.75 0 0 1 6.75 2h5.5v16.5h-5.5A2.75 2.75 0 0 0 4 21.25Z"/>
+            <path fill="currentColor"
+                  d="M13.75 2h5.5A2.75 2.75 0 0 1 22 4.75v16.5l-1.25-1A2.75 2.75 0 0 0 19.25 19.5h-5.5Z"/>
+          </svg>
+          <span>Sharing</span>
+        </a>
+
+      </nav>
+    </div>
+
+    <!-- Logout (bawah kiri) -->
+    <a href="index1.html"
+       class="logout-link flex items-center gap-2 text-[20px] mt-10">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+           class="w-6 h-6">
+        <path fill="currentColor"
+              d="M10 4v2h7v12h-7v2h9V4Zm-1 3L3 12l6 5v-3h7v-4H9Z"/>
+      </svg>
+      <span>Logout</span>
+    </a>
+
+  </aside>
+
+  <!-- ============== HALAMAN KANAN ============== -->
+  <main class="flex-1 px-10 pt-10 pb-8 flex flex-col">
+
+    <!-- Judul -->
+    <h1 class="title-cooper text-[46px] text-[#FF8C8C] mb-6">
+      Projects
+    </h1>
+
+    <!-- CARD FORM PROJECT -->
+    <section class="project-card max-w-[930px] w-full px-7 py-6">
+      <!-- File input -->
+      <div class="mb-4">
+        <input type="file"
+               class="w-full cert-input px-3 py-2 rounded-md bg-[#FFF8DA] text-[14px]">
+      </div>
+
+      <!-- Baris 1: Project Title & Duration -->
+      <div class="grid grid-cols-2 gap-4 mb-4">
+        <div class="field-wrapper">
+          <input type="text" class="input-base font-semibold"
+                 placeholder="Project Title">
+        </div>
+        <div class="field-wrapper">
+          <input type="text" class="input-base font-semibold"
+                 placeholder="Duration">
+        </div>
+      </div>
+
+      <!-- Baris 2: Date + Collaboration -->
+      <div class="grid grid-cols-2 gap-4 mb-4">
+        <!-- Date (KALENDER BENERAN) -->
+        <div class="field-wrapper">
+          <input
+            type="date"
+            class="input-base font-semibold"
+            placeholder="dd/mm/yyyy">
+        </div>
+
+        <!-- Collaboration -->
+        <div class="field-wrapper">
+          <input type="text" class="input-base font-semibold"
+                 placeholder="Collaboration/Team/Individual">
+        </div>
+      </div>
+
+      <!-- Project Link -->
+      <div class="field-wrapper mb-4">
+        <input type="text" class="input-base font-semibold"
+               placeholder="Project Link">
+      </div>
+
+      <!-- Project Description -->
+      <div class="field-wrapper mb-4">
+        <textarea rows="3" class="input-base font-semibold resize-none"
+                  placeholder="Project Description"></textarea>
+      </div>
+
+      <!-- Key Features -->
+      <div class="field-wrapper mb-6">
+        <textarea rows="3" class="input-base font-semibold resize-none"
+                  placeholder="Key Features"></textarea>
+      </div>
+
+      <!-- Add Project button -->
+      <div class="flex justify-center pb-1">
+        <button type="button"
+                class="add-btn px-10 py-2 text-[18px] font-extrabold">
+          Add Project
+        </button>
+      </div>
+    </section>
+
+    <!-- BACKPAGE kanan bawah -->
+    <div class="mt-auto flex items-center justify-between pt-8">
+      <span></span>
+      <a href="dashboarddata.html" class="back-link flex items-center gap-2 text-[22px]">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+             class="w-7 h-7">
+          <path fill="currentColor"
+                d="M11 5l-7 7l7 7v-4h8v-6h-8Z"/>
+        </svg>
+        <span>Backpage</span>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- ============== SCRIPT ============== -->
+  <script>
+    // ganti tulisan "No file chosen" ketika file dipilih
+    const fileInput = document.getElementById("projectFile");
+    const fileNameDisplay = document.getElementById("fileNameDisplay");
+
+    fileInput.addEventListener("change", () => {
+      if (fileInput.files && fileInput.files.length > 0) {
+        fileNameDisplay.textContent = fileInput.files[0].name;
+      } else {
+        fileNameDisplay.textContent = "No file chosen";
+      }
+    });
+  </script>
+
+</body>
+</html>

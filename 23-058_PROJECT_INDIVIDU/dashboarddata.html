@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Personal Data - Admin Panel</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body{
+      background: linear-gradient(90deg, #F9DDFF 40%, #FFF8DA 100%);
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    /* panel kiri */
+    .panel-kiri{
+      background: linear-gradient(180deg, #FFF8DA 0%, #F9DDFF 100%);
+    }
+
+    .btn-menu{
+      background: linear-gradient(90deg, #FFC2A6 0%, #F8AFAF 100%);
+      color:#FFFFFF;
+      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+    }
+    .btn-menu:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 6px 12px rgba(0,0,0,.12);
+      opacity: 0.95;
+    }
+
+    .btn-menu-active{
+      background: #FF8C8C;
+      color:#FFF;
+      box-shadow: 0 7px 16px rgba(0,0,0,.18);
+    }
+
+    .table-head{
+      background: #FF8C8C;
+      color:#FFFFFF;
+      font-weight: 700;
+    }
+
+    /* row background (ganti nama dari .table-row supaya ga konflik sama util Tailwind) */
+    .row-line{
+      background:#FFF8DA;
+      border-bottom:2px solid #FFC2A6;
+    }
+
+    .btn-edit{
+      background:#FFF2C0;
+      border:2px solid #FFB7B7;
+      color:#FF6C6C;
+      font-weight:600;
+      transition: background .15s ease, transform .15s ease;
+    }
+    .btn-edit:hover{
+      background:#FFE8A6;
+      transform: translateY(-1px);
+    }
+
+    .btn-delete{
+      background:#FF5055;
+      color:#FFFFFF;
+      font-weight:700;
+      transition: background .15s ease, transform .15s ease;
+    }
+    .btn-delete:hover{
+      background:#FF3535;
+      transform: translateY(-1px);
+    }
+
+    .logout-link,
+    .back-link{
+      color:#FF6C6C;
+      font-weight:700;
+      transition: transform .15s ease, color .15s ease;
+    }
+    .logout-link:hover,
+    .back-link:hover{
+      transform: translateY(-1px);
+      color:#FF3535;
+    }
+
+    .title-cooper{
+      font-family: "Cooper Black", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex">
+
+  <!-- ============== PANEL KIRI ============== -->
+  <aside class="panel-kiri w-[280px] min-h-screen p-6 flex flex-col justify-between shadow-xl">
+
+    <!-- Logo + judul -->
+    <div>
+      <div class="text-center mb-4">
+        <img src="Assets/logo.png" class="w-40 mx-auto mb-4" alt="Logo Tiara" />
+        <p class="text-[22px] font-extrabold text-[#FF8C8C]">Tiara’s Panel</p>
+      </div>
+
+<!-- MENU -->
+<nav class="space-y-4 mt-8">
+
+  <!-- Personal Data -->
+  <a href="dashboarddata.html"
+     class="btn-menu btn-menu-active flex items-center gap-3 px-5 py-3 rounded-full text-[15px] font-bold">
+    <!-- User Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+         class="w-5 h-5">
+      <path fill="currentColor"
+            d="M12 12a4 4 0 1 0-4-4a4 4 0 0 0 4 4Zm0 2c-4 0-7 1.79-7 4v1h14v-1c0-2.21-3-4-7-4Z"/>
+    </svg>
+    <span>Personal Data</span>
+  </a>
+
+  <!-- Projects -->
+  <a href="dashboardproject.html"
+     class="btn-menu flex items-center gap-3 px-5 py-3 rounded-full text-[15px] font-bold opacity-90">
+    <!-- Folder Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+         class="w-5 h-5">
+      <path fill="currentColor"
+            d="M10 4H4a2 2 0 0 0-2 2v2h20V8a2 2 0 0 0-2-2h-8l-2-2Zm12 6H2v8a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2Z"/>
+    </svg>
+    <span>Projects</span>
+  </a>
+
+  <!-- Certificates (ikon MEDAL baru) -->
+  <a href="dashboardcertif.html"
+     class="btn-menu flex items-center gap-3 px-5 py-3 rounded-full text-[15px] font-bold opacity-90">
+    <!-- Medal / award icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+         class="w-5 h-5">
+      <!-- lingkaran medali -->
+      <circle cx="12" cy="8" r="3.5" fill="currentColor"/>
+      <!-- pita kiri -->
+      <path fill="currentColor"
+            d="M9.5 11.5L7 21l3.2-1.3L12 21l1.8-1.3L17 21l-2.5-9.5A5.8 5.8 0 0 1 12 12a5.8 5.8 0 0 1-2.5-.5Z"/>
+    </svg>
+    <span>Certificates</span>
+  </a>
+
+  <!-- Sharing (ikon BUKU baru) -->
+  <a href="dashboardsharing.html"
+     class="btn-menu flex items-center gap-3 px-5 py-3 rounded-full text-[15px] font-bold opacity-90">
+    <!-- Open book icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+         class="w-5 h-5">
+      <!-- halaman kiri -->
+      <path fill="currentColor"
+            d="M4 4.75A2.75 2.75 0 0 1 6.75 2h5.5v16.5h-5.5A2.75 2.75 0 0 0 4 21.25Z"/>
+      <!-- halaman kanan -->
+      <path fill="currentColor"
+            d="M13.75 2h5.5A2.75 2.75 0 0 1 22 4.75v16.5l-1.25-1A2.75 2.75 0 0 0 19.25 19.5h-5.5Z"/>
+    </svg>
+    <span>Sharing</span>
+  </a>
+
+</nav>
+</div>
+
+    <!-- Logout (bawah kiri) -->
+    <a href="index1.html"
+       class="logout-link flex items-center gap-2 text-[20px] mt-10">
+      <!-- ikon logout -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+           class="w-6 h-6">
+        <path fill="currentColor"
+              d="M10 4v2h7v12h-7v2h9V4Zm-1 3L3 12l6 5v-3h7v-4H9Z"/>
+      </svg>
+      <span>Logout</span>
+    </a>
+
+  </aside>
+
+  <!-- ============== HALAMAN KANAN ============== -->
+  <main class="flex-1 px-10 pt-10 pb-8 flex flex-col">
+
+    <!-- Judul -->
+    <h1 class="title-cooper text-[46px] text-[#FF8C8C] mb-6">
+      Edit Personal Data
+    </h1>
+
+    <!-- TABEL DATA -->
+    <section class="rounded-xl overflow-hidden border border-[#FFB7B7] shadow-xl max-w-[900px]">
+
+      <!-- Header Tabel -->
+      <div class="grid grid-cols-[1.2fr_2.4fr_1.1fr] table-head py-3 px-6 text-center text-[18px]">
+        <p>Field</p>
+        <p>Value</p>
+        <p>Action</p>
+      </div>
+
+      <!-- Row template: class data-row -->
+      <!-- Name -->
+      <div class="data-row grid grid-cols-[1.2fr_2.4fr_1.1fr] row-line py-4 px-6 items-center text-center text-[15px]">
+        <p class="font-semibold text-[#FF6C6C]" data-field-label>Name</p>
+        <div>
+          <span class="value-text block">
+            Aulianisya Tiara Ramadhani
+          </span>
+          <input type="text"
+                 class="value-input hidden w-full mt-1 px-3 py-1.5 rounded-lg border border-[#FF9C9C] focus:outline-none focus:ring-2 focus:ring-[#FF9C9C] bg-[#FFFDF4] text-[15px]"
+                 value="Aulianisya Tiara Ramadhani">
+        </div>
+        <div class="flex justify-center gap-3">
+          <button type="button" class="btn-edit btn-edit-row px-5 py-1 rounded-full text-[14px]">
+            Edit
+          </button>
+          <button type="button" class="btn-delete btn-delete-row px-5 py-1 rounded-full text-[14px]">
+            Delete
+          </button>
+        </div>
+      </div>
+
+      <!-- Student ID -->
+      <div class="data-row grid grid-cols-[1.2fr_2.4fr_1.1fr] row-line py-4 px-6 items-center text-center text-[15px]">
+        <p class="font-semibold text-[#FF6C6C]" data-field-label>Student ID</p>
+        <div>
+          <span class="value-text block">
+            23032010058
+          </span>
+          <input type="text"
+                 class="value-input hidden w-full mt-1 px-3 py-1.5 rounded-lg border border-[#FF9C9C] focus:outline-none focus:ring-2 focus:ring-[#FF9C9C] bg-[#FFFDF4] text-[15px]"
+                 value="23032010058">
+        </div>
+        <div class="flex justify-center gap-3">
+          <button type="button" class="btn-edit btn-edit-row px-5 py-1 rounded-full text-[14px]">
+            Edit
+          </button>
+          <button type="button" class="btn-delete btn-delete-row px-5 py-1 rounded-full text-[14px]">
+            Delete
+          </button>
+        </div>
+      </div>
+
+      <!-- Major -->
+      <div class="data-row grid grid-cols-[1.2fr_2.4fr_1.1fr] row-line py-4 px-6 items-center text-center text-[15px]">
+        <p class="font-semibold text-[#FF6C6C]" data-field-label>Major</p>
+        <div>
+          <span class="value-text block">
+            Industrial Engineering
+          </span>
+          <input type="text"
+                 class="value-input hidden w-full mt-1 px-3 py-1.5 rounded-lg border border-[#FF9C9C] focus:outline-none focus:ring-2 focus:ring-[#FF9C9C] bg-[#FFFDF4] text-[15px]"
+                 value="Industrial Engineering">
+        </div>
+        <div class="flex justify-center gap-3">
+          <button type="button" class="btn-edit btn-edit-row px-5 py-1 rounded-full text-[14px]">
+            Edit
+          </button>
+          <button type="button" class="btn-delete btn-delete-row px-5 py-1 rounded-full text-[14px]">
+            Delete
+          </button>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="data-row grid grid-cols-[1.2fr_2.4fr_1.1fr] row-line py-4 px-6 items-center text-center text-[15px]">
+        <p class="font-semibold text-[#FF6C6C]" data-field-label>Email</p>
+        <div>
+          <span class="value-text block">
+            tiararamadhani225@gmail.com
+          </span>
+          <input type="text"
+                 class="value-input hidden w-full mt-1 px-3 py-1.5 rounded-lg border border-[#FF9C9C] focus:outline-none focus:ring-2 focus:ring-[#FF9C9C] bg-[#FFFDF4] text-[15px]"
+                 value="tiararamadhani225@gmail.com">
+        </div>
+        <div class="flex justify-center gap-3">
+          <button type="button" class="btn-edit btn-edit-row px-5 py-1 rounded-full text-[14px]">
+            Edit
+          </button>
+          <button type="button" class="btn-delete btn-delete-row px-5 py-1 rounded-full text-[14px]">
+            Delete
+          </button>
+        </div>
+      </div>
+
+      <!-- LinkedIn -->
+      <div class="data-row grid grid-cols-[1.2fr_2.4fr_1.1fr] row-line py-4 px-6 items-center text-center text-[15px]">
+        <p class="font-semibold text-[#FF6C6C]" data-field-label>LinkedIn</p>
+        <div>
+          <span class="value-text block">
+            Aulianisya Tiara Ramadhani
+          </span>
+          <input type="text"
+                 class="value-input hidden w-full mt-1 px-3 py-1.5 rounded-lg border border-[#FF9C9C] focus:outline-none focus:ring-2 focus:ring-[#FF9C9C] bg-[#FFFDF4] text-[15px]"
+                 value="Aulianisya Tiara Ramadhani">
+        </div>
+        <div class="flex justify-center gap-3">
+          <button type="button" class="btn-edit btn-edit-row px-5 py-1 rounded-full text-[14px]">
+            Edit
+          </button>
+          <button type="button" class="btn-delete btn-delete-row px-5 py-1 rounded-full text-[14px]">
+            Delete
+          </button>
+        </div>
+      </div>
+
+      <!-- Instagram -->
+      <div class="data-row grid grid-cols-[1.2fr_2.4fr_1.1fr] row-line py-4 px-6 items-center text-center text-[15px]">
+        <p class="font-semibold text-[#FF6C6C]" data-field-label>Instagram</p>
+        <div>
+          <span class="value-text block">
+            @tiaraalsey
+          </span>
+          <input type="text"
+                 class="value-input hidden w-full mt-1 px-3 py-1.5 rounded-lg border border-[#FF9C9C] focus:outline-none focus:ring-2 focus:ring-[#FF9C9C] bg-[#FFFDF4] text-[15px]"
+                 value="@tiaraalsey">
+        </div>
+        <div class="flex justify-center gap-3">
+          <button type="button" class="btn-edit btn-edit-row px-5 py-1 rounded-full text-[14px]">
+            Edit
+          </button>
+          <button type="button" class="btn-delete btn-delete-row px-5 py-1 rounded-full text-[14px]">
+            Delete
+          </button>
+        </div>
+      </div>
+
+      <!-- Youtube -->
+      <div class="data-row grid grid-cols-[1.2fr_2.4fr_1.1fr] row-line py-4 px-6 items-center text-center text-[15px]">
+        <p class="font-semibold text-[#FF6C6C]" data-field-label>Youtube</p>
+        <div>
+          <span class="value-text block">
+            @atiarararamadhani
+          </span>
+          <input type="text"
+                 class="value-input hidden w-full mt-1 px-3 py-1.5 rounded-lg border border-[#FF9C9C] focus:outline-none focus:ring-2 focus:ring-[#FF9C9C] bg-[#FFFDF4] text-[15px]"
+                 value="@atiarararamadhani">
+        </div>
+        <div class="flex justify-center gap-3">
+          <button type="button" class="btn-edit btn-edit-row px-5 py-1 rounded-full text-[14px]">
+            Edit
+          </button>
+          <button type="button" class="btn-delete btn-delete-row px-5 py-1 rounded-full text-[14px]">
+            Delete
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SAVE BAR -->
+    <div id="saveBar" class="mt-6 hidden">
+      <button id="saveBtn"
+              class="mx-auto block px-10 py-2.5 rounded-full text-[18px] font-extrabold text-white"
+              style="background:#FF9666; box-shadow:0 8px 18px rgba(0,0,0,.18);">
+        Save
+      </button>
+    </div>
+
+    <!-- LOGOUT + BACKPAGE sejajar bawah -->
+    <div class="mt-auto flex items-center justify-between pt-8">
+      <!-- (Logout sudah di panel kiri, jadi di sini kosong kanan saja) -->
+      <span></span>
+      <a href="login.html" class="back-link flex items-center gap-2 text-[22px]">
+        <!-- ikon back -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+             class="w-7 h-7">
+          <path fill="currentColor"
+                d="M11 5l-7 7l7 7v-4h8v-6h-8Z"/>
+        </svg>
+        <span>Backpage</span>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- ============== MODAL DELETE ============== -->
+  <div id="deleteModal"
+       class="fixed inset-0 bg-black/20 backdrop-blur-sm items-center justify-center hidden z-40">
+    <div class="bg-[#FFF8DA] rounded-2xl shadow-2xl w-[360px] max-w-[90vw] px-6 py-5 border border-[#FF9C9C]">
+      <div class="flex items-start gap-3 mb-3">
+        <!-- warning icon -->
+        <div class="mt-1 text-[#FF5055]">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               class="w-6 h-6">
+            <path fill="currentColor"
+                  d="M12 2L1 21h22Zm0 4.6L18.53 19H5.47ZM11 10v4h2v-4Zm0 5v2h2v-2Z"/>
+          </svg>
+        </div>
+        <div>
+          <p class="font-semibold text-[#FF5055] text-[16px] mb-1">
+            Delete Confirmation
+          </p>
+          <p class="text-[13px] text-[#555] leading-relaxed">
+            Are you sure you want to delete this data
+            <span id="deleteFieldName" class="font-semibold text-[#FF5055]"></span>?
+            This action cannot be undone.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-4 flex justify-end gap-3 text-[14px]">
+        <button id="confirmDeleteBtn"
+                class="px-5 py-1.5 rounded-full bg-[#FF5055] text-white font-semibold hover:bg-[#FF3535]">
+          Delete
+        </button><button id="cancelDeleteBtn"
+                class="px-5 py-1.5 rounded-full border border-[#FF9C9C] bg-white text-[#555] hover:bg-[#FFECEC]">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== SCRIPT ============== -->
+  <script>
+    // ----- EDIT MODE -----
+    const rows       = document.querySelectorAll(".data-row");
+    const saveBar    = document.getElementById("saveBar");
+    const saveBtn    = document.getElementById("saveBtn");
+    const editBtns   = document.querySelectorAll(".btn-edit-row");
+
+    function anyRowEditing(){
+      return document.querySelector(".data-row.editing") !== null;
+    }
+
+    editBtns.forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const row   = btn.closest(".data-row");
+        const span  = row.querySelector(".value-text");
+        const input = row.querySelector(".value-input");
+
+        // masuk mode edit hanya jika belum editing
+        if(!row.classList.contains("editing")){
+          row.classList.add("editing");
+          input.value = span.textContent.trim();
+          span.classList.add("hidden");
+          input.classList.remove("hidden");
+          input.focus();
+
+          saveBar.classList.remove("hidden");
+        }
+      });
+    });
+
+    saveBtn.addEventListener("click", ()=>{
+      document.querySelectorAll(".data-row.editing").forEach(row=>{
+        const span  = row.querySelector(".value-text");
+        const input = row.querySelector(".value-input");
+        span.textContent = input.value;
+        span.classList.remove("hidden");
+        input.classList.add("hidden");
+        row.classList.remove("editing");
+      });
+
+      saveBar.classList.add("hidden");
+    });
+
+
+    // ----- DELETE MODAL -----
+    const deleteModal      = document.getElementById("deleteModal");
+    const deleteFieldName  = document.getElementById("deleteFieldName");
+    const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+    const cancelDeleteBtn  = document.getElementById("cancelDeleteBtn");
+    const deleteBtns       = document.querySelectorAll(".btn-delete-row");
+
+    let rowToDelete = null;
+
+    function openDeleteModal(row){
+      rowToDelete = row;
+      const fieldLabel = row.querySelector("[data-field-label]").textContent.trim();
+      deleteFieldName.textContent = `(${fieldLabel})`;
+      deleteModal.classList.remove("hidden");
+      deleteModal.classList.add("flex");
+    }
+
+    function closeDeleteModal(){
+      deleteModal.classList.add("hidden");
+      deleteModal.classList.remove("flex");
+      rowToDelete = null;
+    }
+
+    deleteBtns.forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const row = btn.closest(".data-row");
+        openDeleteModal(row);
+      });
+    });
+
+    cancelDeleteBtn.addEventListener("click", closeDeleteModal);
+
+    confirmDeleteBtn.addEventListener("click", ()=>{
+      if(rowToDelete){
+        rowToDelete.remove();
+      }
+      closeDeleteModal();
+
+      // kalau setelah delete tidak ada row editing, sembunyikan tombol Save
+      if(!anyRowEditing()){
+        saveBar.classList.add("hidden");
+      }
+    });
+
+    // klik di luar modal untuk close
+    deleteModal.addEventListener("click", (e)=>{
+      if(e.target === deleteModal){
+        closeDeleteModal();
+      }
+    });
+  </script>
+</body>
+</html>

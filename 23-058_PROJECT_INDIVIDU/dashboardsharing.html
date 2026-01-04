@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sharing - Admin Panel</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body{
+      background: linear-gradient(90deg, #F9DDFF 40%, #FFF8DA 100%);
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    /* panel kiri */
+    .panel-kiri{
+      background: linear-gradient(180deg, #FFF8DA 0%, #F9DDFF 100%);
+    }
+
+    .btn-menu{
+      background: linear-gradient(90deg, #FFC2A6 0%, #F8AFAF 100%);
+      color:#FFFFFF;
+      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+    }
+    .btn-menu:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 6px 12px rgba(0,0,0,.12);
+      opacity: 0.95;
+    }
+
+    .btn-menu-active{
+      background:#FF8C8C;
+      color:#FFF;
+      box-shadow:0 7px 16px rgba(0,0,0,.18);
+    }
+
+    .logout-link,
+    .back-link{
+      color:#FF6C6C;
+      font-weight:700;
+      transition: transform .15s ease, color .15s ease;
+    }
+    .logout-link:hover,
+    .back-link:hover{
+      transform: translateY(-1px);
+      color:#FF3535;
+    }
+
+    .title-cooper{
+      font-family:"Cooper Black", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    /* kartu form sharing */
+    .share-card{
+      background:#FF8C8C;
+      border-radius:24px;
+      border:2px solid #FF6C6C;
+      box-shadow:0 16px 32px rgba(0,0,0,.18);
+    }
+
+    .share-input{
+      background:#FFF8DA;
+      border:2px solid #FF9C9C;
+      outline:none;
+      font-size:14px;
+    }
+    .share-input:focus{
+      box-shadow:0 0 0 2px #FF9C9C80;
+    }
+
+   .add-share-btn{
+      background: linear-gradient(90deg, #FFAE88 100%);
+      border:2px solid #FF6C6C;
+      border-radius:999px;
+      color:#FFFFFF;
+      box-shadow:0 8px 18px rgba(0,0,0,.18);
+      transition:transform .15s ease, filter .15s ease;
+    }
+    .add-share-btn:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.05);
+    }
+
+    /* tabel list sharing */
+    .share-table-wrapper{
+      border:2px solid #FF6C6C;
+      border-radius:16px;
+      overflow:hidden;
+    }
+
+    .share-table-head{
+      background:#FF8C8C;
+      color:#FFFFFF;
+      font-weight:700;
+      border-bottom:2px solid #FF6C6C;
+    }
+
+    .share-row{
+      background:#FFF8DA;
+      border-top:2px solid #FFC2A6;
+    }
+
+    .btn-edit{
+      background:#FFF2C0;
+      border:2px solid #FFB7B7;
+      color:#FF6C6C;
+      font-weight:600;
+      transition: background .15s ease, transform .15s ease;
+    }
+    .btn-edit:hover{
+      background:#FFE8A6;
+      transform: translateY(-1px);
+    }
+
+    .btn-delete{
+      background:#FF5055;
+      color:#FFFFFF;
+      font-weight:700;
+      transition: background .15s ease, transform .15s ease;
+    }
+    .btn-delete:hover{
+      background:#FF3535;
+      transform: translateY(-1px);
+    }
+
+    .save-btn{
+      background:#FF9666;
+      color:#FFFFFF;
+      box-shadow:0 8px 18px rgba(0,0,0,.18);
+    }
+
+    .no-image-pill{
+      background:#FFE0E0;
+      color:#FF6C6C;
+      font-size:12px;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid #FFB7B7;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex">
+
+  <!-- ============== PANEL KIRI ============== -->
+  <aside class="panel-kiri w-[280px] min-h-screen p-6 flex flex-col justify-between shadow-xl">
+
+    <!-- Logo + judul -->
+    <div>
+      <div class="text-center mb-4">
+        <img src="Assets/logo.png" class="w-40 mx-auto mb-4" alt="Logo Tiara" />
+        <p class="text-[22px] font-extrabold text-[#FF8C8C]">Tiara’s Panel</p>
+      </div>
+
+      <!-- MENU -->
+      <nav class="space-y-4 mt-8">
+
+        <!-- Personal Data -->
+        <a href="dashboarddata.html"
+           class="btn-menu flex items-center gap-3 px-5 py-3 rounded-full text-[15px] font-bold opacity-90">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               class="w-5 h-5">
+            <path fill="currentColor"
+                  d="M12 12a4 4 0 1 0-4-4a4 4 0 0 0 4 4Zm0 2c-4 0-7 1.79-7 4v1h14v-1c0-2.21-3-4-7-4Z"/>
+          </svg>
+          <span>Personal Data</span>
+        </a>
+
+        <!-- Projects -->
+        <a href="dashboardproject.html"
+           class="btn-menu flex items-center gap-3 px-5 py-3 rounded-full text-[15px] font-bold opacity-90">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               class="w-5 h-5">
+            <path fill="currentColor"
+                  d="M10 4H4a2 2 0 0 0-2 2v2h20V8a2 2 0 0 0-2-2h-8l-2-2Zm12 6H2v8a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2Z"/>
+          </svg>
+          <span>Projects</span>
+        </a>
+
+        <!-- Certificates -->
+        <a href="dashboardcertif.html"
+           class="btn-menu flex items-center gap-3 px-5 py-3 rounded-full text-[15px] font-bold opacity-90">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               class="w-5 h-5">
+            <circle cx="12" cy="8" r="3.5" fill="currentColor"/>
+            <path fill="currentColor"
+                  d="M9.5 11.5L7 21l3.2-1.3L12 21l1.8-1.3L17 21l-2.5-9.5A5.8 5.8 0 0 1 12 12a5.8 5.8 0 0 1-2.5-.5Z"/>
+          </svg>
+          <span>Certificates</span>
+        </a>
+
+        <!-- Sharing (AKTIF) -->
+        <a href="dashboardsharing.html"
+           class="btn-menu btn-menu-active flex items-center gap-3 px-5 py-3 rounded-full text-[15px] font-bold">
+          <!-- Book icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               class="w-5 h-5">
+            <path fill="currentColor"
+                  d="M4 4.75A2.75 2.75 0 0 1 6.75 2h5.5v16.5h-5.5A2.75 2.75 0 0 0 4 21.25Z"/>
+            <path fill="currentColor"
+                  d="M13.75 2h5.5A2.75 2.75 0 0 1 22 4.75v16.5l-1.25-1A2.75 2.75 0 0 0 19.25 19.5h-5.5Z"/>
+          </svg>
+          <span>Sharing</span>
+        </a>
+
+      </nav>
+    </div>
+
+    <!-- Logout -->
+    <a href="index1.html"
+       class="logout-link flex items-center gap-2 text-[20px] mt-10">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+           class="w-6 h-6">
+        <path fill="currentColor"
+              d="M10 4v2h7v12h-7v2h9V4Zm-1 3L3 12l6 5v-3h7v-4H9Z"/>
+      </svg>
+      <span>Logout</span>
+    </a>
+
+  </aside>
+
+  <!-- ============== HALAMAN KANAN ============== -->
+  <main class="flex-1 px-10 pt-10 pb-8 flex flex-col">
+
+    <!-- Judul -->
+    <h1 class="title-cooper text-[46px] text-[#FF8C8C] mb-6">
+      Sharing
+    </h1>
+
+    <!-- CARD FORM SHARING (ADD MODE) -->
+    <section class="share-card max-w-[900px] w-full mx-auto px-8 pt-7 pb-6">
+
+      <!-- File input -->
+      <div class="mb-4">
+        <input id="addFileInput" type="file"
+               class="w-full share-input px-3 py-2 rounded-md bg-[#FFF8DA] text-[14px]">
+      </div>
+
+      <!-- Title -->
+      <div class="mb-4">
+        <input id="addTitleInput" type="text" placeholder="Content Title"
+               class="w-full share-input px-3 py-2 rounded-md">
+      </div>
+
+      <!-- Description -->
+      <div class="mb-5">
+        <textarea id="addDescInput" rows="3" placeholder="Content Description"
+                  class="w-full share-input px-3 py-2 rounded-md resize-none"></textarea>
+      </div>
+
+      <!-- Tombol Add Content -->
+      <div class="flex justify-center mt-2">
+        <button id="addContentBtn"
+          class="add-share-btn px-10 py-2 rounded-full text-[18px] font-extrabold">
+          Add Content
+        </button>
+      </div>
+    </section>
+
+    <!-- HEADER + LIST TABEL SHARING -->
+    <section class="mt-8 max-w-[900px] w-full mx-auto">
+      <div class="share-table-wrapper">
+        <!-- Header tabel -->
+        <div class="share-table-head grid grid-cols-[1.4fr_2.2fr_3fr_1.4fr] text-center text-[18px]">
+          <div class="py-3 border-r border-[#FF6C6C]">Image</div>
+          <div class="py-3 border-r border-[#FF6C6C]">Title</div>
+          <div class="py-3 border-r border-[#FF6C6C]">Description</div>
+          <div class="py-3">Action</div>
+        </div>
+
+        <!-- Body tabel -->
+        <div id="shareTableBody"></div>
+      </div>
+    </section>
+
+    <!-- SAVE BAR (untuk EDIT MODE) -->
+    <div id="saveBar" class="mt-6 hidden">
+      <button id="saveBtn"
+              class="save-btn mx-auto block px-10 py-2.5 rounded-full text-[18px] font-extrabold">
+        Save
+      </button>
+    </div>
+
+    <!-- BACKPAGE kanan bawah -->
+    <div class="mt-auto flex items-center justify-between pt-8">
+      <span></span>
+      <a href="dashboarddata.html" class="back-link flex items-center gap-2 text-[22px]">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+             class="w-7 h-7">
+          <path fill="currentColor"
+                d="M11 5l-7 7l7 7v-4h8v-6h-8Z"/>
+        </svg>
+        <span>Backpage</span>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- ============== MODAL DELETE ============== -->
+  <div id="deleteModal"
+       class="fixed inset-0 bg-black/20 backdrop-blur-sm items-center justify-center hidden z-40">
+    <div class="bg-[#FFF8DA] rounded-2xl shadow-2xl w-[360px] max-w-[90vw] px-6 py-5 border border-[#FF9C9C]">
+      <div class="flex items-start gap-3 mb-3">
+        <!-- warning icon -->
+        <div class="mt-1 text-[#FF5055]">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               class="w-6 h-6">
+            <path fill="currentColor"
+                  d="M12 2L1 21h22Zm0 4.6L18.53 19H5.47ZM11 10v4h2v-4Zm0 5v2h2v-2Z"/>
+          </svg>
+        </div>
+        <div>
+          <p class="font-semibold text-[#FF5055] text-[16px] mb-1">
+            Delete Confirmation
+          </p>
+          <p class="text-[13px] text-[#555] leading-relaxed">
+            Are you sure you want to delete this content?
+            This action cannot be undone.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-4 flex justify-end gap-3 text-[14px]">
+        <button id="confirmDeleteBtn"
+                class="px-5 py-1.5 rounded-full bg-[#FF5055] text-white font-semibold hover:bg-[#FF3535]">
+          Delete
+        </button>
+        <button id="cancelDeleteBtn"
+                class="px-5 py-1.5 rounded-full border border-[#FF9C9C] bg-white text-[#555] hover:bg-[#FFECEC]">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== SCRIPT ============== -->
+  <script>
+    // ---------- Elemen global ----------
+    const addFileInput  = document.getElementById("addFileInput");
+    const addTitleInput = document.getElementById("addTitleInput");
+    const addDescInput  = document.getElementById("addDescInput");
+    const addContentBtn = document.getElementById("addContentBtn");
+
+    const shareTableBody = document.getElementById("shareTableBody");
+
+    const saveBar = document.getElementById("saveBar");
+    const saveBtn = document.getElementById("saveBtn");
+
+    const deleteModal      = document.getElementById("deleteModal");
+    const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+    const cancelDeleteBtn  = document.getElementById("cancelDeleteBtn");
+
+    let editingRow  = null;
+    let rowToDelete = null;
+
+    // ---------- Template Row ----------
+    function createShareRow({imageUrl, title, description}){
+      const row = document.createElement("div");
+      row.className =
+        "share-row grid grid-cols-[1.4fr_2.2fr_3fr_1.4fr] py-4 px-4 items-center text-center text-[15px]";
+
+      row.innerHTML = `
+        <!-- IMAGE -->
+        <div class="flex flex-col items-center gap-2">
+          <img src="${imageUrl || ""}" alt="Content image"
+               class="content-thumb ${imageUrl ? "" : "hidden"} h-20 object-cover rounded-md border border-[#FFB7B7] bg-white">
+          <span class="no-image-pill ${imageUrl ? "hidden" : ""}">No Image</span>
+
+          <input type="file"
+                 class="image-input hidden text-[13px] mt-1" />
+        </div>
+
+        <!-- TITLE -->
+        <div class="px-3">
+          <span class="title-text block font-semibold text-[#FF6C6C] leading-snug">
+            ${title}
+          </span>
+          <textarea
+            class="title-input hidden w-full mt-1 px-3 py-1.5 rounded-lg border border-[#FF9C9C] bg-[#FFFDF4] text-[14px] leading-snug focus:outline-none focus:ring-2 focus:ring-[#FF9C9C]"
+            rows="4">${title}</textarea>
+        </div>
+
+        <!-- DESCRIPTION -->
+        <div class="px-3">
+          <span class="desc-text block text-[#FF6C6C] leading-snug">
+            ${description}
+          </span>
+          <textarea
+            class="desc-input hidden w-full mt-1 px-3 py-1.5 rounded-lg border border-[#FF9C9C] bg-[#FFFDF4] text-[14px] leading-snug focus:outline-none focus:ring-2 focus:ring-[#FF9C9C]"
+            rows="5">${description}</textarea>
+        </div>
+
+        <!-- ACTION -->
+        <div class="flex justify-center gap-3">
+          <button type="button"
+                  class="btn-edit btn-edit-row px-5 py-1 rounded-full text-[14px]">
+            Edit
+          </button>
+          <button type="button"
+                  class="btn-delete btn-delete-row px-5 py-1 rounded-full text-[14px]">
+            Delete
+          </button>
+        </div>
+      `;
+
+      attachRowEvents(row);
+      return row;
+    }
+
+    // ---------- Event setiap row ----------
+    function attachRowEvents(row){
+      const editBtn   = row.querySelector(".btn-edit-row");
+      const deleteBtn = row.querySelector(".btn-delete-row");
+
+      editBtn.addEventListener("click", () => {
+        enterEditMode(row);
+      });
+
+      deleteBtn.addEventListener("click", () => {
+        openDeleteModal(row);
+      });
+    }
+
+    // ---------- EDIT MODE ----------
+    function enterEditMode(row){
+      if(editingRow && editingRow !== row){
+        exitEditMode(editingRow, true); // cancel row lama
+      }
+
+      editingRow = row;
+      row.classList.add("editing");
+
+      const thumb      = row.querySelector(".content-thumb");
+      const noImage    = row.querySelector(".no-image-pill");
+      const imgInput   = row.querySelector(".image-input");
+      const titleText  = row.querySelector(".title-text");
+      const titleInput = row.querySelector(".title-input");
+      const descText   = row.querySelector(".desc-text");
+      const descInput  = row.querySelector(".desc-input");
+
+      // sync value
+      titleInput.value = titleText.textContent.trim();
+      descInput.value  = descText.textContent.trim();
+
+      // toggle tampilannya
+      titleText.classList.add("hidden");
+      titleInput.classList.remove("hidden");
+
+      descText.classList.add("hidden");
+      descInput.classList.remove("hidden");
+
+      thumb.classList.add("hidden");
+      noImage && noImage.classList.add("hidden");
+      imgInput.classList.remove("hidden");
+
+      saveBar.classList.remove("hidden");
+    }
+
+    function exitEditMode(row, cancel=false){
+      row.classList.remove("editing");
+
+      const thumb      = row.querySelector(".content-thumb");
+      const noImage    = row.querySelector(".no-image-pill");
+      const imgInput   = row.querySelector(".image-input");
+      const titleText  = row.querySelector(".title-text");
+      const titleInput = row.querySelector(".title-input");
+      const descText   = row.querySelector(".desc-text");
+      const descInput  = row.querySelector(".desc-input");
+
+      if(!cancel){
+        // commit perubahan
+        titleText.textContent = titleInput.value || "Untitled Content";
+        descText.textContent  = descInput.value || "";
+
+        if(imgInput.files && imgInput.files[0]){
+          const file = imgInput.files[0];
+          const url  = URL.createObjectURL(file);
+          thumb.src  = url;
+          thumb.classList.remove("hidden");
+          noImage && noImage.classList.add("hidden");
+        }else{
+          if(!thumb.src){
+            thumb.classList.add("hidden");
+            noImage && noImage.classList.remove("hidden");
+          }else{
+            thumb.classList.remove("hidden");
+            noImage && noImage.classList.add("hidden");
+          }
+        }
+      }
+
+      // kembalikan tampilan text
+      titleInput.classList.add("hidden");
+      titleText.classList.remove("hidden");
+
+      descInput.classList.add("hidden");
+      descText.classList.remove("hidden");
+
+      imgInput.classList.add("hidden");
+      if(thumb.src){
+        thumb.classList.remove("hidden");
+      }else{
+        thumb.classList.add("hidden");
+        noImage && noImage.classList.remove("hidden");
+      }
+
+      editingRow = null;
+      saveBar.classList.add("hidden");
+    }
+
+    saveBtn.addEventListener("click", () => {
+      if(editingRow){
+        exitEditMode(editingRow, false);
+      }
+    });
+
+    // ---------- DELETE MODAL ----------
+    function openDeleteModal(row){
+      rowToDelete = row;
+      deleteModal.classList.remove("hidden");
+      deleteModal.classList.add("flex");
+    }
+
+    function closeDeleteModal(){
+      deleteModal.classList.add("hidden");
+      deleteModal.classList.remove("flex");
+      rowToDelete = null;
+    }
+
+    cancelDeleteBtn.addEventListener("click", closeDeleteModal);
+
+    confirmDeleteBtn.addEventListener("click", () => {
+      if(rowToDelete){
+        if(editingRow === rowToDelete){
+          editingRow = null;
+          saveBar.classList.add("hidden");
+        }
+        rowToDelete.remove();
+      }
+      closeDeleteModal();
+    });
+
+    deleteModal.addEventListener("click", (e) => {
+      if(e.target === deleteModal){
+        closeDeleteModal();
+      }
+    });
+
+    // ---------- ADD CONTENT ----------
+    addContentBtn.addEventListener("click", () => {
+      const title = addTitleInput.value.trim() || "Untitled Content";
+      const desc  = addDescInput.value.trim() || "";
+
+      let imageUrl = "";
+      if(addFileInput.files && addFileInput.files[0]){
+        imageUrl = URL.createObjectURL(addFileInput.files[0]);
+      }
+
+      const row = createShareRow({imageUrl, title, description: desc});
+      shareTableBody.appendChild(row);
+
+      // reset form
+      addTitleInput.value = "";
+      addDescInput.value  = "";
+      addFileInput.value  = "";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login — Tiara’s Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Cooper Black"', 'Poppins', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+            sans: ['Poppins', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif']
+          },
+          colors: {
+            ti: {
+              bgTop:  '#FFF8DA',   // Background top
+              bgBottom:'#F9DDFF',   // Background bottom
+              peach:  '##FFAE88',   // Input background
+              pink:   '#FFB7B8',   // Light pink
+              card:   '#FFDFDF',   // Card background
+              line:   '#F8C8C',    // Light border / divider
+              accent: '#FF9C9C',   // Accent
+              accentStrong: '#FF6062'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root{
+      --c-bg-top:#FFF8DA;
+      --c-bg-bottom:#F9DDFF;
+      --c-card:#FFDFDF;
+      --c-input:#FFC2A6;
+      --c-border:#FF9C9C;
+      --c-border-strong:#FF6062;
+      --c-pill-hover:#FF9C9C;
+    }
+
+    body{
+      background: linear-gradient(120deg, var(--c-bg-top) 0%, var(--c-bg-bottom) 100%);
+      -webkit-font-smoothing: antialiased;
+      font-family: 'Poppins',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+      color:#000000;
+    }
+
+    .pill{
+      border-radius:999px;
+      padding:.45rem 1.3rem;
+      background:#FFF8DA;
+      border:2px solid rgba(0,0,0,.12);
+      font-weight:400;
+      font-size:12px;
+      transition:all .2s ease-in-out;
+    }
+    .pill:hover{
+      transform:translateY(-1px);
+      box-shadow:0 4px 8px rgba(0,0,0,.12);
+      background:#FFE6A5;
+    }
+
+    .pill-active{
+      background:linear-gradient(90deg,#F4BCFF,#FFC9C9);
+      border-color:#FF9C9C;
+    }
+
+    .login-card{
+      background:var(--c-card);
+      border-radius:24px;
+      border:2px solid var(--c-border);
+      box-shadow:0 14px 28px rgba(0,0,0,.08);
+    }
+
+    .login-input{
+      background:var(--c-input);
+      border-radius:999px;
+      border:2px solid var(--c-border-strong);
+      outline:none;
+      font-size:14px;
+      padding:.65rem 1rem .65rem 2.4rem;
+    }
+    .login-input::placeholder{
+      color:#767676;
+    }
+    .login-input:focus{
+      box-shadow:0 0 0 2px rgba(255,96,98,.28);
+    }
+
+    .login-btn{
+      background:#FF9C9C;
+      border-top:2px solid var(--c-border-strong);
+      border-bottom-left-radius:0;
+      border-bottom-right-radius:0;
+    }
+    .login-btn:hover{
+      filter:brightness(1.04);
+    }
+
+    .about-heading{
+      font-family:"Cooper Black",Poppins,serif;
+      letter-spacing:.4px;
+      text-shadow:0 2px 0 rgba(0,0,0,.08);
+    }
+  </style>
+</head>
+<body class="font-sans">
+
+    <!-- NAV -->
+  <header class="w-full fixed top-0 left-0 z-50" style="background:linear-gradient(90deg, #FFF8DA 0%, #F9DDFF 100%); box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+    <div class="w-full flex items-center justify-between py-1 px-6">
+      <!-- LOGO kiri -->
+      <a href="#" class="flex items-center gap-3">
+        <img src="Assets/logo.png" alt="Tiara’s Portfolio" class="h-14 md:h-16 w-auto object-contain" />
+      </a>
+
+      <!-- MENU kanan -->
+      <nav class="flex items-center gap-2 text-[12px] ml-auto">
+        <a class="pill !bg-ti-bg2" href="index1.html">Home</a>
+        <a class="pill" style="background:linear-gradient(90deg,#F9DDFF,#FFB7B8)" href="index2.html">Biodata</a>
+        <a class="pill" style="background:linear-gradient(90deg,#F9DDFF,#FFB7B8)" href="index2.html#education">Pendidikan</a>
+        <a class="pill !bg-ti-bg2" href="index1.html#contact">Contact</a>
+        <a class="pill" href="login.html"
+   style="background:linear-gradient(90deg,#FFF6A6,#FFD2A6)">
+   Login Admin
+</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="min-h-screen flex items-center justify-center pt-24 pb-10">
+    <div class="login-card w-[340px] sm:w-[420px] md:w-[460px] px-7 pt-7 pb-6">
+
+      <!-- logo di dalam card -->
+      <div class="flex flex-col items-center">
+        <img src="Assets/logo.png" alt="Tiara’s Portfolio" class="h-20 w-30 object-contain mb-2">
+
+        <h1 class="about-heading text-[22px] md:text-[24px] text-center text-[var(--c-border-strong)] mt-1">
+          Admin Login
+        </h1>
+      </div>
+
+<!-- FORM -->
+<form action="dashboarddata.html" method="GET" class="mt-6 space-y-4">
+  <!-- Username -->
+  <div class="relative">
+    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--c-border-strong)]">
+      <!-- user icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4S8 5.79 8 8s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4
+                 v1h16v-1c0-2.66-5.33-4-8-4z" />
+      </svg>
+    </span>
+    <input type="text" name="username" placeholder="Username" class="login-input w-full">
+  </div>
+
+  <!-- Password -->
+  <div class="relative">
+    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--c-border-strong)]">
+      <!-- lock icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 2a5 5 0 00-5 5v3H6a2 2 0 00-2 2v8a2
+                 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V7a5
+                 5 0 00-5-5zm-3 5a3 3 0 016 0v3H9V7zm3 6a2 2 0
+                 011 3.732V19h-2v-2.268A2 2 0 0112 13z"/>
+      </svg>
+    </span>
+    <input type="password" name="password" placeholder="Password" class="login-input w-full">
+  </div>
+
+  <!-- tombol Login -->
+  <button type="submit"
+          class="mt-3 w-full py-2.5 rounded-b-[0px] rounded-t-[0px] text-center font-extrabold text-[18px] text-white login-btn">
+    Login
+  </button>
+</form>
+
+      <!-- BACK -->
+      <div class="mt-4 border-t border-[var(--c-border)] pt-2 flex justify-start">
+        <a href="index1.html" class="text-sm font-semibold text-[#767676] hover:text-[var(--c-border-strong)]">
+          ← Back
+        </a>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>

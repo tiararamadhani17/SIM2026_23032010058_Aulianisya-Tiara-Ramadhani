@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Biodata & Pendidikan — Tiara’s Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Cooper Black"', 'Poppins','system-ui','-apple-system','Segoe UI','Roboto','Helvetica Neue','Arial','sans-serif'],
+            sans: ['Poppins','system-ui','-apple-system','Segoe UI','Roboto','Helvetica Neue','Arial','sans-serif'],
+          },
+          colors: {
+            ti: {
+              bg1:'#FFF8DA', bg2:'#FFF8DA', bg3:'#F9DDFF',
+              pink:'#FFB7B8', lilac:'#F9DDFF', peach:'#FFAE88',
+              yellow:'#FFB005', pill:'#FEE29F', gray:'#1E1E1E'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root{
+      --c-text:#1E1E1E;
+      --c-bg-top:#FFF8DA;
+      --c-bg-bottom:#F9DDFF;
+
+      --c-panel-peach:#FFC2A6;   /* panel besar Skills */
+      --c-panel-soft:#FFEFD2;    /* krem untuk Hard/Soft skills & hero/hobbies */
+      --c-panel-pink:#FFDDFD;    /* pink lembut umum */
+      --c-panel-cream:#FFF4DD;  /* krem netral (tools & edu card) */
+
+      --c-accent:#FF9C9C;
+      --c-accent-strong:#FF6C6C;
+      --c-purple:#EB85FF;
+    }
+
+    body{
+      background: linear-gradient(180deg,
+        var(--c-bg-top) 0%,
+        var(--c-bg-bottom) 100%);
+      color: var(--c-text);
+      -webkit-font-smoothing: antialiased;
+      font-family: 'Poppins',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+    }
+
+    ::selection{
+      background: var(--c-accent);
+      color:#000;
+    }
+
+    .card-shadow{ box-shadow:0 10px 18px rgba(0,0,0,.06); }
+    .soft-shadow{ box-shadow:0 6px 0 rgba(0,0,0,.12); }
+
+    .pill{
+      border-radius:200px;
+      padding:.5rem 1.1rem;
+      background:#FEE29F;
+      border:2px solid #00000020;
+      transition:all .25s ease-in-out;
+    }
+    .pill:hover{
+      transform:translateY(-2px);
+      box-shadow:0 6px 12px rgba(0,0,0,.12);
+      filter:brightness(1.05);
+    }
+
+    .about-heading{
+      letter-spacing:.5px;
+      text-shadow:0 2px 0 rgba(0,0,0,.08);
+      font-family:"Cooper Black",Poppins,serif;
+    }
+
+    /* lingkaran foto besar */
+    .bio-circle{
+      background:linear-gradient(180deg,#FFDFDF 0%, #FFC2A6 50%, #FFEAA5 100%);
+      border-radius:999px;
+      box-shadow:0 10px 20px rgba(0,0,0,.10);
+    }
+
+    /* panel-panel besar */
+    .panel-main{
+      background:var(--c-panel-peach);
+      border-radius:24px;
+      border:1px solid rgba(0,0,0,.12);
+    }
+    .panel-soft{
+      background:var(--c-panel-soft);
+      border-radius:22px;
+      border:1px solid rgba(0,0,0,.14);
+    }
+
+    /* kotak Tools & Software */
+    .panel-tools{
+      background:var(--c-panel-cream);
+      border-radius:22px;
+      border:1px solid rgba(0,0,0,.16);
+    }
+
+    /* wrapper pendidikan */
+    .edu-wrapper{
+  background:#FFDCC4; 
+  border-radius:26px;
+  border:1px solid rgba(0,0,0,.08);
+}
+    /* kartu pendidikan */
+    .edu-card{
+      background:var(--c-panel-cream);
+      border-radius:20px;
+      border:2px solid rgba(0,0,0,.06);
+    }
+    .edu-title-tag{
+      background:#FF8C8C;
+      color:#fff;
+      padding:.2rem .9rem;
+      border-radius:12px;
+      display:inline-block;
+      font-weight:800;
+      font-size:.9rem;
+    }
+
+    .badge-section{
+      background:#FF8C8C;
+      color:#fff;
+      font-weight:800;
+      padding:.25rem .9rem;
+      border-radius:999px;
+    }
+
+    /* HERO: kartu teks */
+    .hero-card{
+      background:#FFDCC4;
+      border-radius:26px;
+      border:1px solid rgba(0,0,0,.10);
+      box-shadow:0 12px 24px rgba(0,0,0,.06);
+      position:relative;
+      overflow:hidden;
+    }
+    /* Naikkan posisi hero-card & rapatkan padding */
+.hero-card {
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* pastikan isi vertikal center */
+  min-height: 300px; /* biar kotak tidak kependekan */
+}
+
+/* Geser seluruh grid supaya kedua sisi sejajar secara vertikal */
+.hero-section {
+  align-items: center !important;
+}
+
+    /* HOBBIES card */
+    .hobby-card{
+      background:#FFEAF5;
+      border-radius:26px;
+      border:1px solid rgba(0,0,0,.10);
+      box-shadow:0 10px 18px rgba(0,0,0,.05);
+      position:relative;
+    }
+  </style>
+</head>
+
+<body class="font-sans">
+
+  <!-- NAVBAR -->
+  <header class="w-full fixed top-0 left-0 z-50"
+          style="background:linear-gradient(90deg, #FFF8DA 0%, #F9DDFF 100%); box-shadow:0 2px 4px rgba(0,0,0,0.06);">
+    <div class="w-full flex items-center justify-between py-1 px-6">
+      <a href="index1.html" class="flex items-center gap-3">
+        <img src="Assets/logo.png" alt="Tiara’s Portfolio" class="h-14 md:h-16 w-auto object-contain" />
+      </a>
+
+      <nav class="flex items-center gap-2 text-[12px] ml-auto">
+        <a class="pill !bg-ti-bg2" href="index1.html">Home</a>
+        <a class="pill" style="background:linear-gradient(90deg,#F9DDFF,#FFB7B8)" href="#">Biodata</a>
+        <a class="pill" style="background:linear-gradient(90deg,#F9DDFF,#FFB7B8)" href="#education">Pendidikan</a>
+        <a class="pill !bg-ti-bg2" href="index1.html#contact">Contact</a>
+        <a class="pill" href="login.html"
+   style="background:linear-gradient(90deg,#FFF6A6,#FFD2A6)">
+   Login Admin
+</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-[1120px] mx-auto px-4 pt-28 pb-10">
+
+    <!-- HERO BIODATA -->
+    <section class="hero-section grid md:grid-cols-[0.9fr_1.1fr] gap-8 md:gap-10 items-center">
+      <!-- foto bundar -->
+      <div class="flex justify-center md:justify-start">
+        <div class="bio-circle w-[260px] h-[260px] md:w-[300px] md:h-[300px] relative">
+          <div class="absolute inset-4 rounded-full overflow-hidden bg-[#F5F5F5] flex items-center justify-center">
+            <img src="Assets/fotopdh.png" alt="Foto Tiara"
+                 class="w-full h-full object-contain">
+          </div>
+        </div>
+      </div>
+
+      <!-- teks hello (dalam hero-card baru) -->
+      <div class="hero-card px-6 py-5 md:px-8 md:py-6 text-left">
+        <div class="inline-flex items-center gap-2 mb-2 relative z-[1]">
+        </div>
+
+        <h1 class="about-heading text-[32px] md:text-[38px] text-center text-[var(--c-accent-strong)] relative z-[1]">
+          Hello!
+        </h1>
+        <p class="mt-2 text-[14px] md:text-[15px] text-center leading-relaxed relative z-[1]">
+          I’m Aulianisya Tiara Ramadhani, an Industrial Engineering student who loves learning new
+          things and exploring challenges in data analysis, supply chain, and content creation.
+          I’m passionate about growing my skills and making a positive impact through every project
+          I’m involved in.
+        </p>
+
+        <div class="mt-3 text-[13px] md:text-[14px] leading-relaxed space-y-1 relative z-[1]">
+          <p><span class="font-semibold">Name:</span> Aulianisya Tiara Ramadhani</p>
+          <p><span class="font-semibold">Student ID:</span> 23032010058</p>
+          <p><span class="font-semibold">Major:</span> Industrial Engineering</p>
+          <p><span class="font-semibold">Email:</span> tiararamadhani225@gmail.com</p>
+          <p><span class="font-semibold">Social Media:</span> @tiaraalsey</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOBBIES -->
+<section class="mt-10 grid md:grid-cols-[1.2fr_0.8fr] gap-8 items-center">
+  <div class="hobby-card px-6 py-6 md:px-8 md:py-7 text-center md:text-center">
+    <div class="inline-flex items-center gap-2 mb-1">
+      <h2 class="about-heading hobbies-title text-[26px] md:text-[30px] text-[var(--c-purple)]">
+        My Hobbies
+      </h2>
+    </div>
+
+
+        <p class="mt-4 text-[14px] leading-relaxed">
+          In my free time, I love reading books, watching movies, listening to music, and exploring ideas
+          for copywriting.
+        </p>
+        <p class="mt-3 text-[14px] leading-relaxed">
+          Each of these activities helps me see the world from different perspectives – books expand my
+          knowledge, films spark imagination, music inspires emotions, and copywriting allows me to
+          express creativity through meaningful words.
+        </p>
+      </div>
+
+      <!-- foto kedua -->
+      <div class="flex justify-center md:justify-end">
+        <div class="panel-soft card-shadow p-4 rounded-[26px] w-[250px] md:w-[270px]">
+          <div class="rounded-[20px] overflow-hidden bg-[#F5F5F5]">
+            <img src="Assets/foto3x4.png" alt="Tiara portrait"
+                 class="w-full h-full object-contain">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="mt-10">
+      <div class="panel-main card-shadow px-5 py-6 md:px-8 md:py-7">
+        <div class="flex items-center gap-3 mb-3">
+          <h2 class="about-heading text-[26px] md:text-[30px] text-[var(--c-accent-strong)]">
+            Skills
+          </h2>
+        </div>
+
+        <!-- Hard & Soft -->
+        <div class="grid md:grid-cols-2 gap-6 mt-3">
+          <!-- hard skills -->
+          <div class="panel-soft px-5 py-4">
+            <div class="badge-section inline-block text-center mb-2">Hard Skills</div>
+            <ul class="list-disc list-inside text-[13px] md:text-[14px] leading-relaxed space-y-1.5">
+              <li>Data Analysis (Excel, Minitab, SPSS)</li>
+              <li>Statistical Methods (ANOVA, Uji T, Uji Wilcoxon, Forecasting, MRP, EOQ)</li>
+              <li>Supply Chain &amp; Inventory Management</li>
+              <li>Ergonomics &amp; Work System Design</li>
+              <li>System Modeling &amp; Simulation (FlexSim)</li>
+              <li>Content Writing &amp; Copywriting</li>
+              <li>Graphic Content Planning (IG Feed Strategy)</li>
+              <li>Presentation &amp; Reporting (PowerPoint, Canva)</li>
+            </ul>
+          </div>
+
+          <!-- soft skills -->
+          <div class="panel-soft px-5 py-4">
+            <div class="badge-section inline-block mb-2 bg-[#FF7B7B]">Soft Skills</div>
+            <ul class="list-disc list-inside text-[13px] md:text-[14px] leading-relaxed space-y-1.5">
+              <li>Analytical Thinking &amp; Problem Solving</li>
+              <li>Research &amp; Documentation</li>
+              <li>Technical Presentation &amp; Communication</li>
+              <li>Time Management</li>
+              <li>Adaptability</li>
+              <li>Collaboration &amp; Initiative</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tools & Software (warna baru panel-tools) -->
+        <div class="mt-7 panel-tools px-5 py-5">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="about-heading text-[24px] md:text-[26px] text-[var(--c-accent-strong)]">
+              Tools &amp; Software
+            </h3>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-6 text-[13px] md:text-[14px] leading-relaxed">
+            <!-- Engineering & Simulation -->
+            <div>
+              <p class="font-extrabold mb-1">Engineering &amp; Simulation</p>
+              <ul class="list-disc list-inside space-y-1">
+                <li>FlexSim</li>
+                <li>AnyLogic</li>
+                <li>AutoCAD</li>
+                <li>SketchUp</li>
+                <li>WinQSB</li>
+                <li>POM-QM</li>
+                <li>LINGO</li>
+              </ul>
+            </div>
+
+            <!-- Data & Programming -->
+            <div class="space-y-3">
+              <div>
+                <p class="font-extrabold mb-1">Data &amp; Statistical Tools</p>
+                <ul class="list-disc list-inside space-y-1">
+                  <li>SPSS</li>
+                  <li>Minitab</li>
+                  <li>Microsoft Excel (Intermediate–Advanced)</li>
+                </ul>
+              </div>
+
+              <div>
+                <p class="font-extrabold mb-1">Programming &amp; UI/UX</p>
+                <ul class="list-disc list-inside space-y-1">
+                  <li>Visual Studio Code (HTML &amp; CSS Basics)</li>
+                  <li>Figma (UI Layout &amp; Collaborative Design)</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Creative & Content -->
+            <div>
+              <p class="font-extrabold mb-1">Creative &amp; Content</p>
+              <ul class="list-disc list-inside space-y-1">
+                <li>Canva</li>
+                <li>CapCut</li>
+                <li>Microsoft Office Suite</li>
+                <li>Google Workspace</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PENDIDIKAN -->
+    <section id="education" class="mt-12">
+      <h2 class="about-heading text-[28px] md:text-[32px] text-center text-[var(--c-accent-strong)] mb-5">
+        Educational Background
+      </h2>
+
+      <div class="edu-wrapper card-shadow px-4 md:px-6 py-5">
+        <div class="space-y-4">
+
+          <!-- SD -->
+          <div class="edu-card p-4 md:p-5 grid grid-cols-[90px_1fr] md:grid-cols-[120px_1fr] gap-4 items-center">
+            <div class="rounded-[14px] overflow-hidden bg-[#F5F5F5]">
+              <img src="Assets/almus.jpg" alt="SD Al-Muslim" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <span class="edu-title-tag">SD Al-Muslim</span>
+              <p class="mt-2 text-[14px]">2011–2017</p>
+              <p class="text-[14px]">Nilai Akhir: 91</p>
+            </div>
+          </div>
+
+          <!-- SMP -->
+          <div class="edu-card p-4 md:p-5 grid grid-cols-[90px_1fr] md:grid-cols-[120px_1fr] gap-4 items-center">
+            <div class="rounded-[14px] overflow-hidden bg-[#F5F5F5]">
+              <img src="Assets/smpis.jpg" alt="SMP Islam Sabilillah Malang" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <span class="edu-title-tag">SMP Islam Sabilillah Malang</span>
+              <p class="mt-2 text-[14px]">2017–2020</p>
+              <p class="text-[14px]">Nilai Akhir: 90.5</p>
+            </div>
+          </div>
+
+          <!-- SMA -->
+          <div class="edu-card p-4 md:p-5 grid grid-cols-[90px_1fr] md:grid-cols-[120px_1fr] gap-4 items-center">
+            <div class="rounded-[14px] overflow-hidden bg-[#F5F5F5]">
+              <img src="Assets/smantaru.png" alt="SMA Negeri 1 Waru" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <span class="edu-title-tag">SMA Negeri 1 Waru</span>
+              <p class="mt-2 text-[14px]">2020–2023</p>
+              <p class="text-[14px]">Nilai Akhir: 89</p>
+            </div>
+          </div>
+
+          <!-- UPN -->
+          <div class="edu-card p-4 md:p-5 grid grid-cols-[90px_1fr] md:grid-cols-[120px_1fr] gap-4 items-center">
+            <div class="rounded-[14px] overflow-hidden bg-[#F5F5F5]">
+              <img src="Assets/upnvjt.jpg" alt="UPN Veteran Jawa Timur" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <span class="edu-title-tag">UPN “Veteran” Jawa Timur</span>
+              <p class="mt-2 text-[14px]">2023 – Sekarang</p>
+              <p class="text-[14px]">IPK sementara: 3.73</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="w-full pb-6 pt-2">
+    <div class="max-w-[1320px] mx-auto px-4 flex items-center justify-between">
+      <img src="Assets/logo.png" alt="Tiara’s" class="h-12 w-auto object-contain opacity-90" />
+      <p class="text-sm font-semibold opacity-80">
+        © Copyright 2025 Tiara’s Portfolio
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
